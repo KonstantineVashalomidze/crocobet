@@ -12,7 +12,7 @@ public class HealthCheckResult {
     private String endpoint;
     private boolean isHealthy;
     private long responseTimeMs;
-    private HttpStatus statusCode;
+    private int statusCode;
     private String errorMessage;
     private LocalDateTime timestamp;
     private String responseBody;
@@ -21,7 +21,7 @@ public class HealthCheckResult {
         timestamp = LocalDateTime.now();
     }
 
-    public HealthCheckResult(String endpoint, boolean isHealthy, long responseTimeMs, HttpStatus statusCode, String errorMessage, String responseBody) {
+    public HealthCheckResult(String endpoint, boolean isHealthy, long responseTimeMs, int statusCode, String errorMessage, String responseBody) {
         this();
         this.endpoint = endpoint;
         this.isHealthy = isHealthy;
