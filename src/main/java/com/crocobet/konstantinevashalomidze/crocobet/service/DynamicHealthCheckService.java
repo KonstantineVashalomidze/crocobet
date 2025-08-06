@@ -28,13 +28,12 @@ public class DynamicHealthCheckService {
     }
 
     public HealthCheckResult checkEndpoint(MonitoredEndpoint endpoint) {
-        HealthCheckResult result = HealthCheckResult
-                .builder()
-                .endpointId(endpoint.getId())
-                .endpointName(endpoint.getName())
-                .url(endpoint.getUrl())
-                .method(endpoint.getMethod())
-                .build();
+        HealthCheckResult result = new HealthCheckResult(
+                endpoint.getId(),
+                endpoint.getName(),
+                endpoint.getUrl(),
+                endpoint.getMethod()
+                );
 
         long startTime = System.currentTimeMillis();
 

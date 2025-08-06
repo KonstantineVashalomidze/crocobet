@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.UUID;
 
 @Data
-@Builder
 public class MonitoredEndpoint {
     private String id;
     private String name;

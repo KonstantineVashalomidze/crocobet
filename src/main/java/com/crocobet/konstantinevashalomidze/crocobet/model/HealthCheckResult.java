@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 
 @Data
-@Builder
 public class HealthCheckResult {
     private String endpointId;
     private String endpointName;
