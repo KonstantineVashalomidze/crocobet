@@ -1,9 +1,8 @@
-package com.crocobet.konstantinevashalomidze.crocobet.service;
+package com.crocobet.konstantinevashalomidze.service;
 
 
-import com.crocobet.konstantinevashalomidze.crocobet.model.HealthCheckResult;
-import com.crocobet.konstantinevashalomidze.crocobet.model.HttpMethod;
-import com.crocobet.konstantinevashalomidze.crocobet.model.MonitoredEndpoint;
+import com.crocobet.konstantinevashalomidze.model.HealthCheckResult;
+import com.crocobet.konstantinevashalomidze.model.MonitoredEndpoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;

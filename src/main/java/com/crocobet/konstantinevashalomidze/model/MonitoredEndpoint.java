@@ -1,6 +1,5 @@
-package com.crocobet.konstantinevashalomidze.crocobet.model;
+package com.crocobet.konstantinevashalomidze.model;
 
-import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;

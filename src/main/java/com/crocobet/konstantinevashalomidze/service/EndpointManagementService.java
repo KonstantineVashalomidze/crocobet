@@ -1,7 +1,7 @@
-package com.crocobet.konstantinevashalomidze.crocobet.service;
+package com.crocobet.konstantinevashalomidze.service;
 
-import com.crocobet.konstantinevashalomidze.crocobet.model.MonitoredEndpoint;
-import com.crocobet.konstantinevashalomidze.crocobet.repository.EndpointRepository;
+import com.crocobet.konstantinevashalomidze.model.MonitoredEndpoint;
+import com.crocobet.konstantinevashalomidze.repository.EndpointRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

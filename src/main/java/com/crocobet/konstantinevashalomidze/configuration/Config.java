@@ -1,4 +1,4 @@
-package com.crocobet.konstantinevashalomidze.crocobet.configuration;
+package com.crocobet.konstantinevashalomidze.configuration;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;

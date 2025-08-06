@@ -1,8 +1,8 @@
-package com.crocobet.konstantinevashalomidze.crocobet.service;
+package com.crocobet.konstantinevashalomidze.service;
 
-import com.crocobet.konstantinevashalomidze.crocobet.model.HealthCheckResult;
-import com.crocobet.konstantinevashalomidze.crocobet.model.MonitoredEndpoint;
-import com.crocobet.konstantinevashalomidze.crocobet.repository.EndpointRepository;
+import com.crocobet.konstantinevashalomidze.model.HealthCheckResult;
+import com.crocobet.konstantinevashalomidze.model.MonitoredEndpoint;
+import com.crocobet.konstantinevashalomidze.repository.EndpointRepository;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.MeterRegistry;

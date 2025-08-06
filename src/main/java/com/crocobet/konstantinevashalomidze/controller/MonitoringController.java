@@ -1,10 +1,10 @@
-package com.crocobet.konstantinevashalomidze.crocobet.controller;
+package com.crocobet.konstantinevashalomidze.controller;
 
 
-import com.crocobet.konstantinevashalomidze.crocobet.model.HealthCheckResult;
-import com.crocobet.konstantinevashalomidze.crocobet.model.MonitoredEndpoint;
-import com.crocobet.konstantinevashalomidze.crocobet.service.DynamicMonitoringService;
-import com.crocobet.konstantinevashalomidze.crocobet.service.EndpointManagementService;
+import com.crocobet.konstantinevashalomidze.model.HealthCheckResult;
+import com.crocobet.konstantinevashalomidze.model.MonitoredEndpoint;
+import com.crocobet.konstantinevashalomidze.service.DynamicMonitoringService;
+import com.crocobet.konstantinevashalomidze.service.EndpointManagementService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

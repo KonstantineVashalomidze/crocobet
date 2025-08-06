@@ -1,4 +1,4 @@
-package com.crocobet.konstantinevashalomidze.crocobet;
+package com.crocobet.konstantinevashalomidze;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

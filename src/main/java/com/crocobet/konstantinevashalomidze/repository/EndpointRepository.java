@@ -1,6 +1,6 @@
-package com.crocobet.konstantinevashalomidze.crocobet.repository;
+package com.crocobet.konstantinevashalomidze.repository;
 
-import com.crocobet.konstantinevashalomidze.crocobet.model.MonitoredEndpoint;
+import com.crocobet.konstantinevashalomidze.model.MonitoredEndpoint;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
