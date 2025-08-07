@@ -1,5 +1,7 @@
 package com.crocobet.konstantinevashalomidze.service;
 
+import com.crocobet.konstantinevashalomidze.json.request.CreateMonitorRequest;
+import com.crocobet.konstantinevashalomidze.json.request.UpdateMonitorRequest;
 import com.crocobet.konstantinevashalomidze.model.MonitoredEndpoint;
 import com.crocobet.konstantinevashalomidze.repository.EndpointRepository;
 import org.springframework.stereotype.Service;
@@ -19,8 +21,8 @@ public class EndpointManagementService {
         this.monitoringService = monitoringService;
     }
 
-    public MonitoredEndpoint createEndpoint(MonitoredEndpoint endpoint) {
-        return endpointRepository.save(endpoint);
+    public MonitoredEndpoint createEndpoint(CreateMonitorRequest request) {
+        return endpointRepository.save(new MonitoredEndpoint(request));
     }
 
     public Optional<MonitoredEndpoint> getEndpoint(String id) {
@@ -35,22 +37,20 @@ public class EndpointManagementService {
         return endpointRepository.findAllEnabled();
     }
 
-    public MonitoredEndpoint updateEndpoint(String id, MonitoredEndpoint updatedEndpoint) {
+    public Optional<MonitoredEndpoint> updateEndpoint(String id, UpdateMonitorRequest request) {
         return endpointRepository.findById(id)
                 .map(existing -> {
-                    if (updatedEndpoint.getName() != null) existing.setName(updatedEndpoint.getName());
-                    if (updatedEndpoint.getUrl() != null) existing.setUrl(updatedEndpoint.getUrl());
-                    if (updatedEndpoint.getMethod() != null) existing.setMethod(updatedEndpoint.getMethod());
-                    if (updatedEndpoint.getHeaders() != null) existing.setHeaders(updatedEndpoint.getHeaders());
-                    if (updatedEndpoint.getRequestBody() != null) existing.setRequestBody(updatedEndpoint.getRequestBody());
-                    if (updatedEndpoint.getCheckIntervalSeconds() > 0) existing.setCheckIntervalSeconds(updatedEndpoint.getCheckIntervalSeconds());
-                    if (updatedEndpoint.getExpectedStatusCode() != null) existing.setExpectedStatusCode(updatedEndpoint.getExpectedStatusCode());
-                    if (updatedEndpoint.getExpectedContent() != null) existing.setExpectedContent(updatedEndpoint.getExpectedContent());
-                    existing.setEnabled(updatedEndpoint.isEnabled());
+                    if (request.name() != null) existing.setName(request.name());
+                    if (request.url() != null) existing.setUrl(request.url());
+                    if (request.method() != null) existing.setMethod(request.method());
+                    if (request.headers() != null) existing.setHeaders(request.headers());
+                    if (request.requestBody() != null) existing.setRequestBody(request.requestBody());
+                    if (request.expectedStatusCode() != null) existing.setExpectedStatusCode(request.expectedStatusCode());
+                    if (request.expectedContent() != null) existing.setExpectedContent(request.expectedContent());
+                    existing.setEnabled(request.enabled());
 
                     return endpointRepository.save(existing);
-                })
-                .orElse(null);
+                });
     }
 
     public boolean deleteEndpoint(String id) {

@@ -1,6 +1,8 @@
 package com.crocobet.konstantinevashalomidze.controller;
 
 
+import com.crocobet.konstantinevashalomidze.json.request.CreateMonitorRequest;
+import com.crocobet.konstantinevashalomidze.json.request.UpdateMonitorRequest;
 import com.crocobet.konstantinevashalomidze.model.HealthCheckResult;
 import com.crocobet.konstantinevashalomidze.model.MonitoredEndpoint;
 import com.crocobet.konstantinevashalomidze.service.DynamicMonitoringService;
@@ -10,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/monitor")
@@ -26,8 +29,8 @@ public class MonitoringController {
     }
 
     @PostMapping("/endpoints")
-    public ResponseEntity<MonitoredEndpoint> createEndpoint(@RequestBody MonitoredEndpoint endpoint) {
-        MonitoredEndpoint created = endpointService.createEndpoint(endpoint);
+    public ResponseEntity<MonitoredEndpoint> createEndpoint(@RequestBody CreateMonitorRequest request) {
+        MonitoredEndpoint created = endpointService.createEndpoint(request);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 
@@ -38,20 +41,23 @@ public class MonitoringController {
 
     @GetMapping("/endpoints/enabled")
     public ResponseEntity<List<MonitoredEndpoint>> getEnabledEndpoints() {
-        return ResponseEntity.ok(endpointService.getEnabledEndpoints());
+        return new ResponseEntity<>(endpointService.getEnabledEndpoints(), HttpStatus.OK);
     }
 
     @GetMapping("/endpoints/{id}")
     public ResponseEntity<MonitoredEndpoint> getEndpoint(@PathVariable String id) {
-        return endpointService.getEndpoint(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        Optional<MonitoredEndpoint> monitoredEndpoint =  endpointService.getEndpoint(id);
+        return monitoredEndpoint.map(endpoint -> new ResponseEntity<>(endpoint, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
     @PutMapping("/endpoints/{id}")
-    public ResponseEntity<MonitoredEndpoint> updateEndpoint(@PathVariable String id, @RequestBody MonitoredEndpoint endpoint) {
-        MonitoredEndpoint updated = endpointService.updateEndpoint(id, endpoint);
-        return updated != null ? ResponseEntity.ok(updated) : ResponseEntity.notFound().build();
+    public ResponseEntity<MonitoredEndpoint> updateEndpoint(@PathVariable String id, @RequestBody UpdateMonitorRequest request) {
+        Optional<MonitoredEndpoint> updated = endpointService.updateEndpoint(id, request);
+        return updated
+                .map(monitoredEndpoint ->
+                        new ResponseEntity<>(monitoredEndpoint, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/endpoints/{id}")

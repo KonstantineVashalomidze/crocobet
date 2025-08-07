@@ -50,7 +50,7 @@ public class DynamicMonitoringService {
     }
 
 
-    @Scheduled(fixedRate = 30 * 1000)
+    @Scheduled(fixedRate = 20 * 1000)
     public void performScheduledHealthChecks() {
         List<MonitoredEndpoint> enabledEndpoints = endpointRepository.findAllEnabled();
 
