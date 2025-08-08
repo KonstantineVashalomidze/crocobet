@@ -4,13 +4,19 @@ FROM openjdk:21-jdk
 # Set working directory
 WORKDIR /app
 
-# Copy everything from current directory to container
-COPY . .
+# Copy Maven wrapper and pom.xml first
+COPY .mvn .mvn
+COPY mvnw pom.xml ./
 
-# Clean and package the application
-RUN ./mvnw clean package
+# Make mvnw executable and download dependencies
+RUN chmod +x ./mvnw && ./mvnw dependency:go-offline -B
 
-# Expose port 8080 for external access
+# Copy source code
+COPY src ./src
+
+RUN ./mvnw package -DskipTests -B
+
+# Expose port 8080
 EXPOSE 8080
 
 # Run the application

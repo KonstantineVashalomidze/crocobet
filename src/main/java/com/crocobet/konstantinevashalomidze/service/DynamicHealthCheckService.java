@@ -36,7 +36,7 @@ public class DynamicHealthCheckService {
 
         long startTime = System.currentTimeMillis();
 
-
+        // Check if healthy
         try {
             HttpHeaders headers = new HttpHeaders();
 

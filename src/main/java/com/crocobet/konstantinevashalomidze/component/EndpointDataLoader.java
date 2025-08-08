@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
-import java.util.UUID;
 
 @Component
 public class EndpointDataLoader implements CommandLineRunner {
@@ -23,12 +21,11 @@ public class EndpointDataLoader implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         loadDefaultEndpoints();
     }
 
     private void loadDefaultEndpoints() {
-        // Define all the endpoints to be loaded
         String[] urls = {
                 "https://crocobet.com",
                 "https://crocobet.com/sport/pre-match?lang=ka",
@@ -62,11 +59,11 @@ public class EndpointDataLoader implements CommandLineRunner {
                             endpointName,
                             url,
                             HttpMethod.GET,
-                            new HashMap<>(), // Empty headers for now
-                            null, // No request body for GET requests
-                            true, // Enabled by default
-                            "200", // Expected status code
-                            null // No specific content validation
+                            new HashMap<>(),
+                            null,
+                            true,
+                            "200",
+                            null
                     )
             );
 
@@ -77,10 +74,8 @@ public class EndpointDataLoader implements CommandLineRunner {
     }
 
     private String generateEndpointName(String url) {
-        // Extract a meaningful name from the URL
         String name = url.replace("https://", "").replace("http://", "");
 
-        // Handle different types of URLs
         if (name.startsWith("crocobet.com")) {
             if (name.equals("crocobet.com")) {
                 return "Main Site";
@@ -133,7 +128,6 @@ public class EndpointDataLoader implements CommandLineRunner {
             return "Reddit Pixel Config";
         }
 
-        // Fallback: use the domain name
         String[] parts = name.split("/");
         return parts[0].replace("www.", "").replace(".com", "").toUpperCase() + " Endpoint";
     }

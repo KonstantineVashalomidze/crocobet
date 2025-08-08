@@ -52,8 +52,10 @@ public class DynamicMonitoringService {
 
     @Scheduled(fixedRate = 20 * 1000)
     public void performScheduledHealthChecks() {
+        // Find all enabled endpoint to health check
         List<MonitoredEndpoint> enabledEndpoints = endpointRepository.findAllEnabled();
 
+        // If there are nothing do stop
         if (enabledEndpoints.isEmpty()) {
             logger.debug("No enabled endpoints to monitor");
             return;
@@ -61,6 +63,8 @@ public class DynamicMonitoringService {
 
         logger.info("Starting scheduled health checks for {} endpoints", enabledEndpoints.size());
 
+
+        // For every enabled endpoint
         for (MonitoredEndpoint endpoint : enabledEndpoints) {
             try {
                 HealthCheckResult result = healthCheckService.checkEndpoint(endpoint);
@@ -144,6 +148,8 @@ public class DynamicMonitoringService {
                     .register(meterRegistry);
             return statusCode;
         });
+
+
     }
 
     public void removeEndpointMetrics(String endpointId) {
