@@ -1,38 +1,38 @@
-version: '3.8'
+  version: '3.8'
 
-services:
-  crocobet:
-    build: .
-    container_name: crocobet
-    ports:
-      - "8080:8080"
+  services:
+    crocobet:
+      build: .
+      container_name: crocobet
+      ports:
+        - "8080:8080"
 
-  prometheus:
-    image: prom/prometheus:latest
-    container_name: prometheus
-    ports:
-      - "9090:9090"
-    volumes:
-      - ./prometheus:/etc/prometheus  # Mounts config
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-    depends_on:
-      - crocobet
+    prometheus:
+      image: prom/prometheus:latest
+      container_name: prometheus
+      ports:
+        - "9090:9090"
+      volumes:
+        - ./prometheus:/etc/prometheus  # Mounts config
+      command:
+        - '--config.file=/etc/prometheus/prometheus.yml'
+      depends_on:
+        - crocobet
 
-  grafana:
-    image: grafana/grafana:latest
-    container_name: grafana
-    ports:
-      - "3000:3000"
-    volumes:
-      - grafana-data:/var/lib/grafana
-      - ./grafana/provisioning:/etc/grafana/provisioning  # For auto-configuration
-    environment:
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=admin
-      - GF_USERS_ALLOW_SIGN_UP=false
-    depends_on:
-      - prometheus
+    grafana:
+      image: grafana/grafana:latest
+      container_name: grafana
+      ports:
+        - "3000:3000"
+      volumes:
+        - grafana-data:/var/lib/grafana
+        - ./grafana/provisioning:/etc/grafana/provisioning  # For auto-configuration
+      environment:
+        - GF_SECURITY_ADMIN_USER=admin
+        - GF_SECURITY_ADMIN_PASSWORD=admin
+        - GF_USERS_ALLOW_SIGN_UP=false
+      depends_on:
+        - prometheus
 
-volumes:
-  grafana-data:
+  volumes:
+    grafana-data:
